@@ -1,0 +1,252 @@
+Working directory is ./working/qQUAAm
+Unzipping into ./working/qQUAAm
+Looking for the readme.md file.
+  Looking in hpce-2018-cw1-hs2715
+   Got it.
+Cleaning the bin directory (just in case).
+Force building bin/julia.
+mkdir -p bin
+g++ -o bin/julia -W -Wall -std=c++11 -Wno-unused-parameter -I include -DNDEBUG=1 -O3 -pthread src/julia_frame_reference.cpp src/julia_frame_parallel_inner.cpp src/julia_frame_parallel_outer.cpp src/julia_frame_parallel_both.cpp src/julia_driver.cpp  -ltbb
+
+##############################################################
+## Begin test 1
+
+
+    for(unsigned y=0; y<height; y++){
+        tbb::parallel_for(0u, width, [&](unsigned x){
+            // Map pixel to z_0
+            complex_t z(-1.5f+x*dx, -1.5f+y*dy);
+
+Pass, parallel_inner calls tbb::parallel_for
+
+## End test 1
+##############################################################
+
+
+##############################################################
+## Begin test 2
+
+
+Pass, parallel_inner executes correctly
+
+## End test 2
+##############################################################
+
+
+##############################################################
+## Begin test 3
+
+
+Pass, parallel_inner output is correct
+
+## End test 3
+##############################################################
+
+
+##############################################################
+## Begin test 4
+
+    float dx=3.0f/width, dy=3.0f/height;
+
+    tbb::parallel_for(0u, height, [&](unsigned y){
+        for(unsigned x=0; x<width; x++){
+            // Map pixel to z_0
+
+Pass, parallel_outer calls tbb::parallel_for
+
+## End test 4
+##############################################################
+
+
+##############################################################
+## Begin test 5
+
+
+Pass, parallel_outer executes correctly
+
+## End test 5
+##############################################################
+
+
+##############################################################
+## Begin test 6
+
+
+Pass, parallel_outer output is correct
+
+## End test 6
+##############################################################
+
+
+##############################################################
+## Begin test 7
+
+    float dx=3.0f/width, dy=3.0f/height;
+
+    tbb::parallel_for(0u, height, [&](unsigned y){
+        tbb::parallel_for(0u, width, [&](unsigned x){
+            // Map pixel to z_0
+            complex_t z(-1.5f+x*dx, -1.5f+y*dy);
+
+Pass, parallel_both calls tbb::parallel_for
+
+## End test 7
+##############################################################
+
+
+##############################################################
+## Begin test 8
+
+
+Pass, parallel_both executes correctly
+
+## End test 8
+##############################################################
+
+
+##############################################################
+## Begin test 9
+
+
+Pass, parallel_both output is correct
+
+## End test 9
+##############################################################
+
+
+##############################################################
+## Begin test 10
+
+Pass, For wide output reference time 3058 similar to parallel_outer 3038 (1)
+
+## End test 10
+##############################################################
+
+
+##############################################################
+## Begin test 11
+
+Pass, For wide output reference time 3058 slower than parallel_inner 769 (1)
+
+## End test 11
+##############################################################
+
+
+##############################################################
+## Begin test 12
+
+Pass, For wide output parallel_both time 759 similar to parallel_inner 769 (1)
+
+## End test 12
+##############################################################
+
+
+##############################################################
+## Begin test 13
+
+Pass, For tall output reference time 2985 similar to parallel_inner 2997 (1)
+
+## End test 13
+##############################################################
+
+
+##############################################################
+## Begin test 14
+
+Pass, For tall output reference time 2985 slower than parallel_outer 761 (1)
+
+## End test 14
+##############################################################
+
+
+##############################################################
+## Begin test 15
+
+Pass, For tall output parallel_both time 750 similar to parallel_outer 761 (1)
+
+## End test 15
+##############################################################
+
+
+##############################################################
+## Begin test 16
+
+Pass, Check for existence of file results/max_iter_versus_time.pdf.
+
+## End test 16
+##############################################################
+
+
+##############################################################
+## Begin test 17
+
+Pass, Check for existence of file results/dimension_versus_time.pdf.
+
+## End test 17
+##############################################################
+
+
+##############################################################
+## Begin test 18
+
+Pass, Check for existence of file results/release_max_iter_versus_time.pdf.
+
+## End test 18
+##############################################################
+
+
+##############################################################
+## Begin test 19
+
+Pass, Check for existence of file results/release_dimension_versus_speedup.pdf.
+
+## End test 19
+##############################################################
+
+
+##############################################################
+## Begin test 20
+
+Pass, Check for existence of file results/scaling_max_iter.pdf.
+
+## End test 20
+##############################################################
+
+
+##############################################################
+## Begin test 21
+
+Pass, Check for existence of file results/scaling_dimension.pdf.
+
+## End test 21
+##############################################################
+
+
+##############################################################
+## Begin test 22
+
+Pass, Check for existence of file results/scaling_width.pdf.
+
+## End test 22
+##############################################################
+
+
+##############################################################
+## Begin test 23
+
+Pass, Check for existence of file results/scaling_height.pdf.
+
+## End test 23
+##############################################################
+
+
+##############################################################
+## Begin test 24
+
+Pass, Check for existence of file results/scaling_max_frames.pdf.
+
+## End test 24
+##############################################################
+
+Passed 24 out of 24 tests.
+Output log is in ./working/qQUAAm/hs2715.log

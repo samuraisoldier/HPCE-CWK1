@@ -1,0 +1,3 @@
+bin/julia could not be compiled as submitted:
+	Windows-style path separators in julia_frame_parallel_inner.cpp, julia_frame_parallel_outer.cpp and julia_frame_parallel_both.cpp.
+1 fix needed; 20 percentage point penalty applied.
